@@ -57,6 +57,7 @@ jobs:
         run: |
             perl -v
             #apt-get update
+            apt-get install -y curl
             #apt-get install -y libreadline-dev
 
       - name: Regular tests
