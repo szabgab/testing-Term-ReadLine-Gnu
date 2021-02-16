@@ -88,10 +88,11 @@ jobs:
             yum install -y perl
             perl -V
             yum install -y readline-devel
-            yum install -y libncurses-devel
-            #libtermcap-devel
-            # no such packeges: libtinfo-devel  libcurses-perl
-
+            echo ncurses
+            yum search ncurses
+            echo curses
+            yum search curses
+            yum install -y libtermcap-devel
       - name: Regular tests
         env:
             RELEASE_TESTING: 1
