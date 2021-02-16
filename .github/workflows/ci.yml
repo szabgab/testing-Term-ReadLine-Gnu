@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+  schedule:
+    - cron: '42 5 * * *'
+
+jobs:
+  build-in-container:
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+
+    strategy:
+      fail-fast: false
+      matrix:
+        perl-version:
+          - '5.32'
+          - '5.30'
+          - '5.20'
+
+    container:
+      image: perldocker/perl-tester:${{ matrix.perl-version }}     # https://hub.docker.com/r/perldocker/perl-tester
+
+    name: Build on Linux with Perl ${{ matrix.perl-version }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install prerequisites
+        run: |
+            perl -v
+            apt-get update
+            apt-get install -y libreadline-dev
+
+      - name: Regular tests
+        env:
+            RELEASE_TESTING: 1
+        run: |
+            cpanm --verbose Term::ReadLine::Gnu
+
