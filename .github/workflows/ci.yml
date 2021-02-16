@@ -61,5 +61,5 @@ jobs:
             RELEASE_TESTING: 1
         run: |
             curl -L https://cpanmin.us | perl - App::cpanminus
-            cpanm --verbose Term::ReadLine::Gnu
+            ~/perl5/bin/cpanm --verbose Term::ReadLine::Gnu
 
