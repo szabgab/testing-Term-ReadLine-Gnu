@@ -33,7 +33,7 @@ jobs:
         run: |
             perl -v
             #apt-get update
-            #apt-get install -y libreadline-dev
+            apt-get install -y libreadline-dev
 
       - name: Regular tests
         env:
@@ -53,8 +53,8 @@ jobs:
       - name: Install prerequisites
         run: |
             perl -v
-            apt-get update
-            apt-get install -y libreadline-dev
+            #apt-get update
+            sudo apt-get install -y libreadline-dev
 
       - name: Install
         env:
