@@ -88,6 +88,7 @@ jobs:
             yum install -y perl
             perl -V
             yum install -y readline-devel
+            yum install -y readline
             echo Search for readline
             yum search readline
             echo Search for ncurses
@@ -95,6 +96,9 @@ jobs:
             echo Serch for curses
             yum search curses
             yum install -y libtermcap-devel
+
+            echo locate readline.h
+            find / -name readline.h
       - name: Regular tests
         env:
             RELEASE_TESTING: 1
