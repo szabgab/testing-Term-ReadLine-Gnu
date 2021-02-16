@@ -41,6 +41,31 @@ jobs:
         run: |
             cpanm --verbose Term::ReadLine::Gnu
 
+  plain-ubuntu:
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+
+    container:
+      image: ubuntu:20.10
+
+    name: Build on Ubuntu 20.10
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install prerequisites
+        run: |
+            perl -v
+            #apt-get update
+            #apt-get install -y libreadline-dev
+
+      - name: Regular tests
+        env:
+            RELEASE_TESTING: 1
+        run: |
+            cpanm --verbose Term::ReadLine::Gnu
+
+
   ubuntu-native:
     runs-on: ubuntu-latest
     env:
@@ -63,40 +88,41 @@ jobs:
             curl -L https://cpanmin.us | perl - App::cpanminus
             ~/perl5/bin/cpanm --verbose Term::ReadLine::Gnu
 
-  windows-native-strawberry:
-    runs-on: windows-latest
-    #env:
-    #  TERM: xterm-256color
-
-    strategy:
-      fail-fast: false
-      matrix:
-        perl-version:
-          - '5.32'
-          #- '5.30'
-          #- '5.20'
-
-    name: Windows native
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up perl
-        uses: shogo82148/actions-setup-perl@v1
-        with:
-            perl-version: ${{ matrix.perl }}
-            distribution: 'strawberry'
-
-
-      - name: Install prerequisites
-        run: |
-            perl -v
-            #apt-get update
-            #sudo apt-get install -y libreadline-dev
-
-      - name: Install
-        env:
-            RELEASE_TESTING: 1
-        run: |
-            #curl -L https://cpanmin.us | perl - App::cpanminus
-            cpanm --verbose Term::ReadLine::Gnu
+# TODO
+#  windows-native-strawberry:
+#    runs-on: windows-latest
+#    #env:
+#    #  TERM: xterm-256color
+#
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        perl-version:
+#          - '5.32'
+#          #- '5.30'
+#          #- '5.20'
+#
+#    name: Windows native
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Set up perl
+#        uses: shogo82148/actions-setup-perl@v1
+#        with:
+#            perl-version: ${{ matrix.perl }}
+#            distribution: 'strawberry'
+#
+#
+#      - name: Install prerequisites
+#        run: |
+#            perl -v
+#            #apt-get update
+#            #sudo apt-get install -y libreadline-dev
+#
+#      - name: Install
+#        env:
+#            RELEASE_TESTING: 1
+#        run: |
+#            #curl -L https://cpanmin.us | perl - App::cpanminus
+#            cpanm --verbose Term::ReadLine::Gnu
 
