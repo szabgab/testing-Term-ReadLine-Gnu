@@ -84,8 +84,6 @@ jobs:
         run: |
             yum install -y perl
             perl -v
-            #apt-get update
-            #apt-get install -y curl
             #apt-get install -y libreadline-dev
 
       - name: Regular tests
@@ -93,7 +91,7 @@ jobs:
             RELEASE_TESTING: 1
         run: |
             curl -L https://cpanmin.us | perl - App::cpanminus
-            ~/perl5/bin/cpanm --verbose Term::ReadLine::Gnu
+            cpanm --verbose Term::ReadLine::Gnu
 
 
   ubuntu-native:
