@@ -97,8 +97,11 @@ jobs:
             yum search curses
             yum install -y libtermcap-devel
 
-            echo locate readline.h
-            find / -name readline.h
+            #echo locate readline.h
+            #find / -name readline.h
+            # /usr/include/readline/readline.h
+            ls -l /usr
+            ln -s /usr /usr/local
       - name: Regular tests
         env:
             RELEASE_TESTING: 1
