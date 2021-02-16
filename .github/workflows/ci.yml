@@ -68,8 +68,9 @@ jobs:
             RELEASE_TESTING: 1
         run: |
             curl -L https://cpanmin.us | perl - App::cpanminus
-            ~/perl5/bin/cpanm --verbose Term::ReadLine::Gnu
+            cpanm --verbose Term::ReadLine::Gnu
 
+# TODO
   plain-centos:
     runs-on: ubuntu-latest
     env:
@@ -89,13 +90,13 @@ jobs:
             yum install -y readline-devel libtermcap-devel
             # no such packeges: libtinfo-devel libncurses-devel libcurses-perl
 
-      - name: Regular tests
-        env:
-            RELEASE_TESTING: 1
-        run: |
-            curl -L https://cpanmin.us | perl - App::cpanminus
-            cpanm --verbose Term::ReadLine::Gnu
-
+#      - name: Regular tests
+#        env:
+#            RELEASE_TESTING: 1
+#        run: |
+#            curl -L https://cpanmin.us | perl - App::cpanminus
+#            cpanm --verbose Term::ReadLine::Gnu
+#
 
   ubuntu-native:
     runs-on: ubuntu-latest
