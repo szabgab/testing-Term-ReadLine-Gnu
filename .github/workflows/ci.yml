@@ -41,32 +41,32 @@ jobs:
         run: |
             cpanm --verbose Term::ReadLine::Gnu
 
-  plain-ubuntu:
-    runs-on: ubuntu-latest
-    env:
-      TERM: xterm-256color
-
-    container:
-      image: ubuntu:20.10
-
-    name: Build on Ubuntu 20.10
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install prerequisites
-        run: |
-            perl -v
-            apt-get update
-            apt-get install -y curl
-            #apt-get install -y libreadline-dev
-            apt-cache search perlio
-
-      - name: Regular tests
-        env:
-            RELEASE_TESTING: 1
-        run: |
-            curl -L https://cpanmin.us | perl - App::cpanminus
-            ~/perl5/bin/cpanm --verbose Term::ReadLine::Gnu
+#  plain-ubuntu:
+#    runs-on: ubuntu-latest
+#    env:
+#      TERM: xterm-256color
+#
+#    container:
+#      image: ubuntu:20.10
+#
+#    name: Build on Ubuntu 20.10
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Install prerequisites
+#        run: |
+#            perl -v
+#            apt-get update
+#            apt-get install -y curl
+#            #apt-get install -y libreadline-dev
+#            apt-cache search perlio
+#
+#      - name: Regular tests
+#        env:
+#            RELEASE_TESTING: 1
+#        run: |
+#            curl -L https://cpanmin.us | perl - App::cpanminus
+#            ~/perl5/bin/cpanm --verbose Term::ReadLine::Gnu
 
   plain-centos:
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
         run: |
             yum install -y perl
             perl -v
-            #apt-get install -y libreadline-dev
+            yum install -y readline-devel
 
       - name: Regular tests
         env:
