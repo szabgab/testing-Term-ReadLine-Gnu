@@ -59,6 +59,7 @@ jobs:
             apt-get update
             apt-get install -y curl
             #apt-get install -y libreadline-dev
+            apt-cache search perlio
 
       - name: Regular tests
         env:
@@ -81,6 +82,7 @@ jobs:
 
       - name: Install prerequisites
         run: |
+            yum install -y perl
             perl -v
             #apt-get update
             #apt-get install -y curl
