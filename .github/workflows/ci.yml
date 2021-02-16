@@ -60,10 +60,8 @@ jobs:
             apt-get install -y perl
             apt-get install -y build-essential
             apt-get install -y curl
-            #Could not find neither libtermcap, libtinfo, libncurses, or libcurses. so let's try
             apt-get install -y libncurses-dev
             apt-get install -y libreadline-dev
-            apt-cache search perlio
 
       - name: Regular tests
         env:
@@ -89,16 +87,18 @@ jobs:
         run: |
             yum install -y perl
             perl -V
-            yum install -y readline-devel libtermcap-devel
-            # no such packeges: libtinfo-devel libncurses-devel libcurses-perl
+            yum install -y readline-devel
+            yum install -y libncurses-devel
+            #libtermcap-devel
+            # no such packeges: libtinfo-devel  libcurses-perl
 
-#      - name: Regular tests
-#        env:
-#            RELEASE_TESTING: 1
-#        run: |
-#            curl -L https://cpanmin.us | perl - App::cpanminus
-#            cpanm --verbose Term::ReadLine::Gnu
-#
+      - name: Regular tests
+        env:
+            RELEASE_TESTING: 1
+        run: |
+            curl -L https://cpanmin.us | perl - App::cpanminus
+            cpanm --verbose Term::ReadLine::Gnu
+
 
   ubuntu-native:
     runs-on: ubuntu-latest
