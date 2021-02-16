@@ -9,10 +9,10 @@ on:
     - cron: '42 5 * * *'
 
 jobs:
-  build-in-container:
+  perl-tester:
     runs-on: ubuntu-latest
-    env:
-      TERM: xterm-256color
+    #env:
+    #  TERM: xterm-256color
 
     strategy:
       fail-fast: false
@@ -32,10 +32,31 @@ jobs:
       - name: Install prerequisites
         run: |
             perl -v
+            #apt-get update
+            #apt-get install -y libreadline-dev
+
+      - name: Regular tests
+        env:
+            RELEASE_TESTING: 1
+        run: |
+            cpanm --verbose Term::ReadLine::Gnu
+
+  ubuntu-native:
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+
+    name: Ubuntu native
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install prerequisites
+        run: |
+            perl -v
             apt-get update
             apt-get install -y libreadline-dev
 
-      - name: Regular tests
+      - name: Install
         env:
             RELEASE_TESTING: 1
         run: |
