@@ -87,6 +87,7 @@ jobs:
         run: |
             yum install -y perl
             perl -V
+            yum install epel-release
             yum search perl-Term-ReadLine
             yum search perl-Term-ReadLine-Gnu
             yum install perl-Term-ReadLine-Gnu
