@@ -87,8 +87,8 @@ jobs:
         run: |
             yum install -y perl
             perl -V
-            yum search Term::ReadLine::Gnu
-            yum install perl(Term::ReadLine::Gnu)
+            #yum search Term::ReadLine::Gnu
+            yum install perl-Term-ReadLine-Gnu
             #yum install -y readline-devel
             #yum install -y readline
             #echo Search for readline
