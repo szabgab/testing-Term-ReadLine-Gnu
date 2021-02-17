@@ -87,22 +87,24 @@ jobs:
         run: |
             yum install -y perl
             perl -V
-            yum install -y readline-devel
-            yum install -y readline
-            echo Search for readline
-            yum search readline
-            echo Search for ncurses
-            yum search ncurses
-            echo Serch for curses
-            yum search curses
-            yum install -y libtermcap-devel
+            yum search Term::ReadLine::Gnu
+            yum install perl(Term::ReadLine::Gnu)
+            #yum install -y readline-devel
+            #yum install -y readline
+            #echo Search for readline
+            #yum search readline
+            #echo Search for ncurses
+            #yum search ncurses
+            #echo Serch for curses
+            #yum search curses
+            #yum install -y libtermcap-devel
 
-            # /usr/include/readline/readline.h
-            ls -l /
-            ls -l /usr/
-            ln -s /usr /usr/local
-            echo locate readline.h
-            sudo find / -name readline.h
+            ## /usr/include/readline/readline.h
+            #ls -l /
+            #ls -l /usr/
+            #ln -s /usr /usr/local
+            #echo locate readline.h
+            #sudo find / -name readline.h
       - name: Regular tests
         env:
             RELEASE_TESTING: 1
