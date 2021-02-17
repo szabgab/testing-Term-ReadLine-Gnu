@@ -90,7 +90,7 @@ jobs:
             yum install -y epel-release
             yum search perl-Term-ReadLine
             yum search perl-Term-ReadLine-Gnu
-            yum install perl-Term-ReadLine-Gnu
+            yum install -y perl-Term-ReadLine-Gnu
             #yum install -y readline-devel
             #yum install -y readline
             #echo Search for readline
@@ -107,12 +107,13 @@ jobs:
             #ln -s /usr /usr/local
             #echo locate readline.h
             #sudo find / -name readline.h
-      - name: Regular tests
-        env:
-            RELEASE_TESTING: 1
+      - name: Show version
+      #  env:
+      #      RELEASE_TESTING: 1
         run: |
-            curl -L https://cpanmin.us | perl - App::cpanminus
-            cpanm --verbose Term::ReadLine::Gnu
+      #      curl -L https://cpanmin.us | perl - App::cpanminus
+      #      cpanm --verbose Term::ReadLine::Gnu
+            perl -MTerm::ReadLine::Gnu -e 'print "Term::ReadLine::Gnu $Term::ReadLine::Gnu::VERSION\n"'
 
 
   ubuntu-native:
