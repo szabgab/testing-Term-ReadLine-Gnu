@@ -43,6 +43,31 @@ jobs:
 
   plain-ubuntu:
     runs-on: ubuntu-latest
+    #env:
+    #  TERM: xterm-256color
+
+    container:
+      image: ubuntu:20.10
+
+    name: Build on Ubuntu 20.10
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install prerequisites
+        run: |
+            perl -v
+            apt-get update
+            apt-get install -y perl
+            apt-get install -y libterm-readline-gnu-perl
+
+      - name: Show version
+        run: |
+            perl -MTerm::ReadLine -e 'print "Term::ReadLine $Term::ReadLine::VERSION\n"'
+            perl -MTerm::ReadLine -e 'print "Term::ReadLine::Gnu $Term::ReadLine::Gnu::VERSION\n"'
+
+
+  plain-ubuntu-cpanm:
+    runs-on: ubuntu-latest
     env:
       TERM: xterm-256color
 
@@ -69,17 +94,28 @@ jobs:
         run: |
             curl -L https://cpanmin.us | perl - App::cpanminus
             cpanm --verbose Term::ReadLine::Gnu
+      - name: Show version
+        run: |
+            perl -MTerm::ReadLine -e 'print "Term::ReadLine $Term::ReadLine::VERSION\n"'
+            perl -MTerm::ReadLine -e 'print "Term::ReadLine::Gnu $Term::ReadLine::Gnu::VERSION\n"'
 
-# TODO
+
   plain-centos:
     runs-on: ubuntu-latest
-    env:
-      TERM: xterm-256color
+    #env:
+    #  TERM: xterm-256color
+    strategy:
+      fail-fast: false
+      matrix:
+        centos:
+          - '7'
+          - '8'
+
 
     container:
-      image: centos:7
+      image: centos:${{ matrix.centos }}
 
-    name: Build on Centos 7
+    name: Build on Centos ${{ matrix.centos }}
     steps:
       - uses: actions/checkout@v2
 
