@@ -41,6 +41,39 @@ jobs:
         run: |
             cpanm --verbose Term::ReadLine::Gnu
 
+  perl:
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+
+    strategy:
+      fail-fast: false
+      matrix:
+        perl-version:
+          - '5.32'
+          - '5.30'
+          - '5.20'
+
+    container:
+      image: perl:${{ matrix.perl-version }}
+
+    name: Build on Linux with Perl ${{ matrix.perl-version }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install prerequisites
+        run: |
+            perl -v
+            #apt-get update
+            apt-get install -y libreadline-dev
+
+      - name: Regular tests
+        env:
+            RELEASE_TESTING: 1
+        run: |
+            cpanm --verbose Term::ReadLine::Gnu
+
+
   plain-ubuntu:
     runs-on: ubuntu-latest
     #env:
@@ -124,8 +157,6 @@ jobs:
             yum install -y perl
             perl -V
             yum install -y epel-release
-            yum search perl-Term-ReadLine
-            yum search perl-Term-ReadLine-Gnu
             yum install -y perl-Term-ReadLine-Gnu
 
       - name: Show version
