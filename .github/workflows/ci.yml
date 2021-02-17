@@ -94,7 +94,8 @@ jobs:
 
       - name: Show version
         run: |
-            perl -MTerm::ReadLine::Gnu -e 'print "Term::ReadLine::Gnu $Term::ReadLine::Gnu::VERSION\n"'
+            perl -MTerm::ReadLine -e 'print "Term::ReadLine $Term::ReadLine::VERSION\n"'
+            perl -MTerm::ReadLine -e 'print "Term::ReadLine::Gnu $Term::ReadLine::Gnu::VERSION\n"'
 
 
   ubuntu-native:
